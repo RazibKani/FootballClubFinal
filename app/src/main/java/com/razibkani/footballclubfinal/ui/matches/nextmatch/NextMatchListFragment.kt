@@ -74,7 +74,7 @@ class NextMatchListFragment : Fragment(), NextMatchMvpView {
 
     private fun initAdapter() {
         nextMatchAdapter.onItemClickListener = object : OnItemClickListener<Event> {
-            override fun onClick(item: Event) {
+            override fun onClick(position: Int, item: Event) {
                 MatchDetailActivity.start(context, item)
             }
         }

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.razibkani.footballclubfinal.R
 import com.razibkani.footballclubfinal.data.model.Event
-import com.razibkani.footballclubfinal.data.model.FavoriteEvent
 import com.razibkani.footballclubfinal.ui.base.BaseActivity
 import com.razibkani.footballclubfinal.ui.detailmatch.MatchDetailActivity
 import com.razibkani.footballclubfinal.utils.OnItemClickListener
@@ -66,21 +65,14 @@ class FavoritesMatchFragment : Fragment(), FavoritesMatchMvpView {
         loadingIndicator.hide()
     }
 
-    override fun updateData(favoriteEvents: List<FavoriteEvent>) {
+    override fun updateData(favoriteEvents: List<Event>) {
         favMatchAdapter.updateData(favoriteEvents)
     }
 
     private fun initAdapter() {
-        favMatchAdapter.onItemClickListener = object : OnItemClickListener<FavoriteEvent> {
-            override fun onClick(item: FavoriteEvent) {
-                val event = Event(item.idEvent,
-                        item.homeTeam,
-                        item.awayTeam,
-                        item.homeScore.toString(),
-                        item.awayScore.toString(),
-                        item.timeEvent,
-                        item.dateEvent)
-                MatchDetailActivity.start(context, event)
+        favMatchAdapter.onItemClickListener = object : OnItemClickListener<Event> {
+            override fun onClick(position: Int, item: Event) {
+                MatchDetailActivity.start(context, item)
             }
         }
     }

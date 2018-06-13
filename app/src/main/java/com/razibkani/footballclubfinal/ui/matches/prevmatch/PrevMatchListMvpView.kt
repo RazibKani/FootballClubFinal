@@ -1,6 +1,7 @@
 package com.razibkani.footballclubfinal.ui.matches.prevmatch
 
 import com.razibkani.footballclubfinal.data.model.Event
+import com.razibkani.footballclubfinal.data.model.FootballLeague
 import com.razibkani.footballclubfinal.ui.base.MvpView
 
 interface PrevMatchListMvpView : MvpView {
@@ -11,5 +12,7 @@ interface PrevMatchListMvpView : MvpView {
 
     fun showErrorMessage(message: String)
 
-    fun updateData(eventList: List<Event>)
+    fun updateDataEvents(eventList: List<Event>)
+
+    fun updateDataLeagues(leagues: List<FootballLeague>)
 }

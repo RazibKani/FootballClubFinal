@@ -2,6 +2,8 @@ package com.razibkani.footballclubfinal.data
 
 import android.database.sqlite.SQLiteConstraintException
 import com.razibkani.footballclubfinal.data.local.DbCallback
+import com.razibkani.footballclubfinal.data.local.DbFavoriteEvent
+import com.razibkani.footballclubfinal.data.local.DbFavoriteTeam
 import com.razibkani.footballclubfinal.data.local.FootballClubDbHelper
 import com.razibkani.footballclubfinal.data.model.*
 import com.razibkani.footballclubfinal.data.remote.ApiService
@@ -14,8 +16,8 @@ import org.jetbrains.anko.db.select
 class DataManager(private val apiService: ApiService,
                   private val database: FootballClubDbHelper) {
 
-    suspend fun getFootballPrevEvent(): FootballEventResponse {
-        return apiService.getFootballPrevEvent(Constants.LEAGUEID).await()
+    suspend fun getFootballPrevEvent(leagueId: String): FootballEventResponse {
+        return apiService.getFootballPrevEvent(leagueId).await()
     }
 
     suspend fun getFootballNextEvent(): FootballEventResponse {
@@ -30,16 +32,25 @@ class DataManager(private val apiService: ApiService,
         return apiService.getFootballClubDetail(clubName).await()
     }
 
-    fun addToFavorite(event: Event, callback: DbCallback) {
+    suspend fun getFootballTeams(leagueName: String): FootballTeamResponse {
+        return apiService.getTeams(leagueName).await()
+    }
+
+    suspend fun getPlayerByTeamName(teamName: String): FootballPlayerResponse {
+        return apiService.getPlayerByTeamName(teamName).await()
+    }
+
+    fun addMatchToFavorite(event: Event, callback: DbCallback) {
         try {
             database.use {
-                insert(FavoriteEvent.TABLE_FAVORITE,
-                        FavoriteEvent.ID_EVENT to event.idEvent,
-                        FavoriteEvent.DATE_EVENT to event.dateEvent,
-                        FavoriteEvent.HOME_TEAM_EVENT to event.strHomeTeam,
-                        FavoriteEvent.AWAY_TEAM_EVENT to event.strAwayTeam,
-                        FavoriteEvent.HOME_SCORE_EVENT to event.intHomeScore,
-                        FavoriteEvent.AWAY_SCORE_EVENT to event.intAwayScore)
+                insert(DbFavoriteEvent.TABLE_FAVORITE_MATCH,
+                        DbFavoriteEvent.ID_EVENT to event.idEvent,
+                        DbFavoriteEvent.DATE_EVENT to event.dateEvent,
+                        DbFavoriteEvent.TIME_EVENT to event.timeEvent,
+                        DbFavoriteEvent.HOME_TEAM_EVENT to event.strHomeTeam,
+                        DbFavoriteEvent.AWAY_TEAM_EVENT to event.strAwayTeam,
+                        DbFavoriteEvent.HOME_SCORE_EVENT to event.intHomeScore,
+                        DbFavoriteEvent.AWAY_SCORE_EVENT to event.intAwayScore)
 
             }
             callback.onSuccess()
@@ -48,10 +59,10 @@ class DataManager(private val apiService: ApiService,
         }
     }
 
-    fun removeFromFavorite(eventId: String, callback: DbCallback) {
+    fun removeMatchFromFavorite(eventId: String, callback: DbCallback) {
         try {
             database.use {
-                delete(FavoriteEvent.TABLE_FAVORITE, "(EVENT_ID = {id})",
+                delete(DbFavoriteEvent.TABLE_FAVORITE_MATCH, "(EVENT_ID = {id})",
                         "id" to eventId)
             }
             callback.onSuccess()
@@ -60,11 +71,11 @@ class DataManager(private val apiService: ApiService,
         }
     }
 
-    fun getFavoritesEvent(): List<FavoriteEvent> {
-        var favorites: List<FavoriteEvent> = ArrayList()
+    fun getFavoritesMatch(): List<Event> {
+        var favorites: List<Event> = ArrayList()
         try {
             database.use {
-                val result = select(FavoriteEvent.TABLE_FAVORITE)
+                val result = select(DbFavoriteEvent.TABLE_FAVORITE_MATCH)
                 favorites = result.parseList(classParser())
             }
         } catch (e: SQLiteConstraintException) {
@@ -73,19 +84,90 @@ class DataManager(private val apiService: ApiService,
         return favorites
     }
 
-    fun favoriteState(eventId: String): Boolean {
+    fun favoriteMatchState(eventId: String): Boolean {
         var isFavorite = false
         try {
             database.use {
-                val result = select(FavoriteEvent.TABLE_FAVORITE)
+                val result = select(DbFavoriteEvent.TABLE_FAVORITE_MATCH)
                         .whereArgs("(EVENT_ID = {id})",
                                 "id" to eventId)
-                val favorite = result.parseList(classParser<FavoriteEvent>())
+                val favorite = result.parseList(classParser<Event>())
                 if (!favorite.isEmpty()) isFavorite = true
             }
         } catch (e: SQLiteConstraintException) {
             isFavorite = false
         }
         return isFavorite
+    }
+
+    fun addTeamToFavorite(team: FootballTeam, callback: DbCallback) {
+        try {
+            database.use {
+                insert(DbFavoriteTeam.TABLE_FAVORITE_TEAM,
+                        DbFavoriteTeam.ID_TEAM to team.idTeam,
+                        DbFavoriteTeam.NAME_TEAM to team.strTeam,
+                        DbFavoriteTeam.FORMED_YEAR_TEAM to team.intFormedYear,
+                        DbFavoriteTeam.STADIUM_TEAM to team.strStadium,
+                        DbFavoriteTeam.DESCRIPTION_TEAM to team.strDescriptionEN,
+                        DbFavoriteTeam.BADGE_TEAM to team.strTeamBadge,
+                        DbFavoriteTeam.FANART_TEAM to team.strTeamFanart)
+
+            }
+            callback.onSuccess()
+        } catch (e: SQLiteConstraintException) {
+            callback.onFailed()
+        }
+    }
+
+    fun removeTeamFromFavorite(teamId: String, callback: DbCallback) {
+        try {
+            database.use {
+                delete(DbFavoriteTeam.TABLE_FAVORITE_TEAM, "(TEAM_ID = {id})",
+                        "id" to teamId)
+            }
+            callback.onSuccess()
+        } catch (e: SQLiteConstraintException) {
+            callback.onFailed()
+        }
+    }
+
+    fun getFavoritesTeam(): List<FootballTeam> {
+        var favorites: List<FootballTeam> = ArrayList()
+        try {
+            database.use {
+                val result = select(DbFavoriteTeam.TABLE_FAVORITE_TEAM)
+                favorites = result.parseList(classParser())
+            }
+        } catch (e: SQLiteConstraintException) {
+            favorites = ArrayList()
+        }
+        return favorites
+    }
+
+    fun favoriteTeamState(teamId: String): Boolean {
+        var isFavorite = false
+        try {
+            database.use {
+                val result = select(DbFavoriteTeam.TABLE_FAVORITE_TEAM)
+                        .whereArgs("(TEAM_ID = {id})",
+                                "id" to teamId)
+                val favorite = result.parseList(classParser<FootballTeam>())
+                if (!favorite.isEmpty()) isFavorite = true
+            }
+        } catch (e: SQLiteConstraintException) {
+            isFavorite = false
+        }
+        return isFavorite
+    }
+
+    fun getLeagues(): List<FootballLeague> {
+        val leagues: MutableList<FootballLeague> = mutableListOf()
+        leagues.add(0, FootballLeague("4328", "English Premier League", false))
+        leagues.add(1, FootballLeague("4332", "Italian Serie A", false))
+        leagues.add(2, FootballLeague("4334", "French Ligue 1", false))
+        leagues.add(3, FootballLeague("4335", "Spanish La Liga", false))
+        leagues.add(4, FootballLeague("4331", "German Bundesliga", false))
+
+        return leagues.toList()
     }
 }

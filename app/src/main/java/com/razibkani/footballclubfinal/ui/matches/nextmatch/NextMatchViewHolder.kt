@@ -15,7 +15,7 @@ class NextMatchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.textAwayTeam.text = event.strAwayTeam
 
         onClickListener?.let {
-            itemView.setOnClickListener { onClickListener.onClick(event) }
+            itemView.setOnClickListener { onClickListener.onClick(adapterPosition, event) }
         }
     }
 }

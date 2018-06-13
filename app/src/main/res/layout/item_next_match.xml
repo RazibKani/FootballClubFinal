@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:textAppearance="@style/TextAppearanceSmall"
+            android:textAppearance="@style/TextAppearanceMedium"
             android:textColor="@color/colorPrimary"
             tools:text="Sen, 05 Mar 2018" />
 
@@ -33,7 +33,7 @@
             android:layout_marginTop="8dp"
             android:layout_toLeftOf="@+id/textVersus"
             android:layout_toStartOf="@+id/textVersus"
-            android:textAppearance="@style/TextAppearanceMedium"
+            android:textAppearance="@style/TextAppearanceLarge"
             tools:text="Brighton" />
 
         <TextView
@@ -47,7 +47,7 @@
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/textVersus"
             android:layout_toRightOf="@+id/textVersus"
-            android:textAppearance="@style/TextAppearanceMedium"
+            android:textAppearance="@style/TextAppearanceLarge"
             tools:text="Arsenal" />
 
         <TextView
@@ -63,7 +63,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/versus"
-            android:textAppearance="@style/TextAppearanceSmall" />
+            android:textAppearance="@style/TextAppearanceMedium" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

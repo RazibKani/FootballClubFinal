@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:textAppearance="@style/TextAppearanceSmall"
+            android:textAppearance="@style/TextAppearanceMedium"
             tools:text="Sen, 05 Mar 2018" />
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="4dp"
-            android:textAppearance="@style/TextAppearanceSmall"
+            android:textAppearance="@style/TextAppearanceMedium"
             tools:text="22:00" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_marginTop="8dp"
             android:layout_toLeftOf="@+id/textScoreHome"
             android:layout_toStartOf="@+id/textScoreHome"
-            android:textAppearance="@style/TextAppearanceMedium"
+            android:textAppearance="@style/TextAppearanceLarge"
             tools:text="Brighton" />
 
         <TextView
@@ -57,7 +57,7 @@
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/textScoreAway"
             android:layout_toRightOf="@+id/textScoreAway"
-            android:textAppearance="@style/TextAppearanceMedium"
+            android:textAppearance="@style/TextAppearanceLarge"
             tools:text="Arsenal" />
 
         <TextView
@@ -69,7 +69,7 @@
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/textVersus"
             android:layout_toRightOf="@+id/textVersus"
-            android:textAppearance="@style/TextAppearanceMedium"
+            android:textAppearance="@style/TextAppearanceLarge"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
             tools:text="3" />
@@ -87,7 +87,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/versus"
-            android:textAppearance="@style/TextAppearanceSmall" />
+            android:textAppearance="@style/TextAppearanceMedium" />
 
         <TextView
             android:id="@+id/textScoreHome"
@@ -101,7 +101,7 @@
             android:layout_marginTop="8dp"
             android:layout_toLeftOf="@+id/textVersus"
             android:layout_toStartOf="@+id/textVersus"
-            android:textAppearance="@style/TextAppearanceMedium"
+            android:textAppearance="@style/TextAppearanceLarge"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
             tools:text="2" />

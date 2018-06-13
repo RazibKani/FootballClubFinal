@@ -9,20 +9,24 @@ import javax.inject.Inject
 class PrevMatchListPresenter @Inject constructor(private val dataManager: DataManager,
                                                  private val context: CoroutineContextProvider) : BasePresenter<PrevMatchListMvpView>() {
 
-    fun getEvents() {
+    fun getEvents(leagueId: String) {
         mvpView?.showLoading()
 
         async(context.main) {
-            val data = dataManager.getFootballPrevEvent()
+            val data = dataManager.getFootballPrevEvent(leagueId)
 
             mvpView?.apply {
                 if (data.events.isNotEmpty()) {
-                    this.updateData(data.events)
+                    this.updateDataEvents(data.events)
                 } else {
                     this.showErrorMessage("Event Kosong")
                 }
                 this.hideLoading()
             }
         }
+    }
+
+    fun getLeagues() {
+        mvpView?.updateDataLeagues(dataManager.getLeagues())
     }
 }

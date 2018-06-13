@@ -39,10 +39,10 @@ class MatchDetailPresenter @Inject constructor(private val dataManager: DataMana
         }
     }
 
-    fun favoriteState(eventId: String): Boolean = dataManager.favoriteState(eventId)
+    fun favoriteState(eventId: String): Boolean = dataManager.favoriteMatchState(eventId)
 
     fun removeFromFavorite(eventId: String) {
-        dataManager.removeFromFavorite(eventId, object : DbCallback {
+        dataManager.removeMatchFromFavorite(eventId, object : DbCallback {
             override fun onSuccess() {
                 mvpView?.showSuccessMessage("Removed from Favorite")
             }
@@ -54,7 +54,7 @@ class MatchDetailPresenter @Inject constructor(private val dataManager: DataMana
     }
 
     fun addToFavorite(event: Event) {
-        dataManager.addToFavorite(event, object : DbCallback {
+        dataManager.addMatchToFavorite(event, object : DbCallback {
             override fun onSuccess() {
                 mvpView?.showSuccessMessage("Added to Favorite")
             }

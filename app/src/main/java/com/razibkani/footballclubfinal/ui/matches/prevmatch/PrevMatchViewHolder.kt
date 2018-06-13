@@ -19,7 +19,7 @@ class PrevMatchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             textScoreAway.text = event.intAwayScore
 
             onClickListener?.let {
-                setOnClickListener { onClickListener.onClick(event) }
+                setOnClickListener { onClickListener.onClick(adapterPosition, event) }
             }
         }
     }

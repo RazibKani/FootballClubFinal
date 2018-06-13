@@ -1,9 +1,7 @@
 package com.razibkani.footballclubfinal.data.remote
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
-import com.razibkani.footballclubfinal.data.model.FootballClubResponse
-import com.razibkani.footballclubfinal.data.model.FootballDetailEventResponse
-import com.razibkani.footballclubfinal.data.model.FootballEventResponse
+import com.razibkani.footballclubfinal.data.model.*
 import kotlinx.coroutines.experimental.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -23,6 +21,12 @@ interface ApiService {
 
     @GET("searchteams.php")
     fun getFootballClubDetail(@Query("t") clubName: String): Deferred<FootballClubResponse>
+
+    @GET("search_all_teams.php")
+    fun getTeams(@Query("l") leagueName: String): Deferred<FootballTeamResponse>
+
+    @GET("searchplayers.php")
+    fun getPlayerByTeamName(@Query("t") teamName: String): Deferred<FootballPlayerResponse>
 
     companion object Factory {
         fun create(): ApiService {

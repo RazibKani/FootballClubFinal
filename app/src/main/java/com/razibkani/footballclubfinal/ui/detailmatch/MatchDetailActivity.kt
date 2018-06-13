@@ -74,7 +74,7 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_detail_match, menu)
+        menuInflater.inflate(R.menu.menu_detail, menu)
         menuItem = menu
         setFavorite()
         return true
@@ -132,8 +132,8 @@ class MatchDetailActivity : BaseActivity(), MatchDetailMvpView {
         toast(successMessage)
     }
 
-    override fun showErrorMessage(message: String) {
-        toast(message)
+    override fun showErrorMessage(errorMessage: String) {
+        toast(errorMessage)
     }
 
     override fun showData(event: DetailEvent) {

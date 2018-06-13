@@ -3,11 +3,14 @@ package com.razibkani.footballclubfinal.utils
 import android.support.annotation.LayoutRes
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.support.v4.content.ContextCompat
+import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.razibkani.footballclubfinal.R
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,15 +26,29 @@ fun View.hide() {
     visibility = View.GONE
 }
 
-fun ImageView.loadUrl(imageUrl: String) {
-    Picasso.with(this.context).load(imageUrl).into(this)
+fun SwipeRefreshLayout.showRefresh() {
+    isRefreshing = true
+}
+
+fun SwipeRefreshLayout.dismissRefresh() {
+    isRefreshing = false
+}
+
+fun ImageView.loadUrl(imageUrl: String?) {
+    if (imageUrl != null) {
+        Picasso.with(this.context).load(imageUrl).into(this)
+    } else {
+        this.setImageDrawable(ContextCompat.getDrawable(this.context, R.drawable.ic_placeholder))
+    }
 }
 
 fun TextView.setFormattedDate(date: String?) {
-    val oldDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(date)
-    val newDate = SimpleDateFormat("EEE, dd MMM yyyy", Locale("in", "ID")).format(oldDate)
+    date?.let {
+        val oldDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(date)
+        val newDate = SimpleDateFormat("EEE, dd MMM yyyy", Locale("in", "ID")).format(oldDate)
 
-    text = newDate
+        text = newDate
+    }
 }
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {

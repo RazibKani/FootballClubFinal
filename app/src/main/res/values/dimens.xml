@@ -4,5 +4,7 @@
     <dimen name="corner_radius">4dp</dimen>
     <dimen name="elevation">2dp</dimen>
     <dimen name="divider">8dp</dimen>
+    <dimen name="divider_small">4dp</dimen>
     <dimen name="tab_height">48dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

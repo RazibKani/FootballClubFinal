@@ -9,7 +9,7 @@ class FavoritesMatchPresenter @Inject constructor(private val dataManager: DataM
     fun getFavoriteEvents() {
         mvpView?.apply {
             showLoading()
-            updateData(dataManager.getFavoritesEvent())
+            updateData(dataManager.getFavoritesMatch())
             hideLoading()
         }
     }

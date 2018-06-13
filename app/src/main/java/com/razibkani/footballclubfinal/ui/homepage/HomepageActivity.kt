@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import com.razibkani.footballclubfinal.R
 import com.razibkani.footballclubfinal.ui.base.BaseActivity
-import com.razibkani.footballclubfinal.ui.favorites.favoritesmatch.FavoritesMatchFragment
+import com.razibkani.footballclubfinal.ui.favorites.FavoritesFragment
 import com.razibkani.footballclubfinal.ui.matches.MatchesFragment
+import com.razibkani.footballclubfinal.ui.teams.TeamsFragment
 import com.razibkani.footballclubfinal.utils.inTransaction
 import kotlinx.android.synthetic.main.activity_homepage.*
 
@@ -21,12 +22,13 @@ class HomepageActivity : BaseActivity() {
             }
             R.id.navigation_teams -> {
                 supportFragmentManager.inTransaction {
+                    replace(R.id.fragmentContainer, TeamsFragment.newInstance(), TeamsFragment.TAG)
                 }
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_favorite -> {
                 supportFragmentManager.inTransaction {
-                    replace(R.id.fragmentContainer, FavoritesMatchFragment.newInstance(), FavoritesMatchFragment.TAG)
+                    replace(R.id.fragmentContainer, FavoritesFragment.newInstance(), FavoritesFragment.TAG)
                 }
                 return@OnNavigationItemSelectedListener true
             }

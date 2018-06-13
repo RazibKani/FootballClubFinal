@@ -10,10 +10,11 @@ data class FootballEventResponse(
 
 @Parcelize
 data class Event(
+        val id: Int?, //Need this for database autoincrement
         @SerializedName("idEvent") val idEvent: String?,
+        @SerializedName("dateEvent") val dateEvent: String?,
+        @SerializedName("strTime") val timeEvent: String?,
         @SerializedName("strHomeTeam") val strHomeTeam: String?,
         @SerializedName("strAwayTeam") val strAwayTeam: String?,
         @SerializedName("intHomeScore") val intHomeScore: String?,
-        @SerializedName("intAwayScore") val intAwayScore: String?,
-        @SerializedName("strTime") val timeEvent: String?,
-        @SerializedName("dateEvent") val dateEvent: String?) : Parcelable
+        @SerializedName("intAwayScore") val intAwayScore: String?) : Parcelable
