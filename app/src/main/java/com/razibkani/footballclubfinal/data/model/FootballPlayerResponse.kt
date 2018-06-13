@@ -10,12 +10,12 @@ data class FootballPlayerResponse(
 
 @Parcelize
 data class Player(
-        @SerializedName("idPlayer") val idPlayer: String,
-        @SerializedName("strPlayer") val strPlayer: String,
-        @SerializedName("strDescriptionEN") val strDescriptionEN: String,
-        @SerializedName("strPosition") val strPosition: String,
-        @SerializedName("strHeight") val strHeight: String,
-        @SerializedName("strWeight") val strWeight: String,
-        @SerializedName("strThumb") val strThumb: String,
-        @SerializedName("strCutout") val strCutout: String
+        @SerializedName("idPlayer") val idPlayer: String?,
+        @SerializedName("strPlayer") val strPlayer: String?,
+        @SerializedName("strDescriptionEN") val strDescriptionEN: String?,
+        @SerializedName("strPosition") val strPosition: String?,
+        @SerializedName("strHeight") val strHeight: String?,
+        @SerializedName("strWeight") val strWeight: String?,
+        @SerializedName("strThumb") val strThumb: String?,
+        @SerializedName("strCutout") val strCutout: String?
 ) : Parcelable

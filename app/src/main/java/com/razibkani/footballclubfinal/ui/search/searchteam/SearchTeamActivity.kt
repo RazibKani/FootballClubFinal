@@ -1,4 +1,4 @@
-package com.razibkani.footballclubfinal.ui.search.searchmatches
+package com.razibkani.footballclubfinal.ui.search.searchteam
 
 import android.content.Context
 import android.content.Intent
@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import com.razibkani.footballclubfinal.R
-import com.razibkani.footballclubfinal.data.model.Event
+import com.razibkani.footballclubfinal.data.model.FootballTeam
 import com.razibkani.footballclubfinal.ui.base.BaseActivity
-import com.razibkani.footballclubfinal.ui.detailmatch.MatchDetailActivity
+import com.razibkani.footballclubfinal.ui.detailteam.DetailTeamActivity
 import com.razibkani.footballclubfinal.utils.OnItemClickListener
 import com.razibkani.footballclubfinal.utils.VerticalItemDecoration
 import com.razibkani.footballclubfinal.utils.dismissRefresh
@@ -18,16 +18,16 @@ import kotlinx.android.synthetic.main.content_search.*
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
-class SearchMatchesActivity : BaseActivity(), SearchMatchesMvpView, SearchView.OnQueryTextListener {
+class SearchTeamActivity : BaseActivity(), SearchTeamMvpView, SearchView.OnQueryTextListener {
 
     @Inject
-    lateinit var presenter: SearchMatchesPresenter
+    lateinit var presenter: SearchTeamPresenter
     @Inject
-    lateinit var searchMatchAdapter: SearchMatchesAdapter
+    lateinit var searchTeamAdapter: SearchTeamAdapter
 
     companion object {
         fun start(context: Context) {
-            val intent = Intent(context, SearchMatchesActivity::class.java)
+            val intent = Intent(context, SearchTeamActivity::class.java)
             context.startActivity(intent)
         }
     }
@@ -66,8 +66,8 @@ class SearchMatchesActivity : BaseActivity(), SearchMatchesMvpView, SearchView.O
         toast(message)
     }
 
-    override fun updateMatches(matches: List<Event>) {
-        searchMatchAdapter.updateData(matches)
+    override fun updateTeams(teams: List<FootballTeam>) {
+        searchTeamAdapter.updateData(teams)
     }
 
     override fun onQueryTextChange(newText: String): Boolean {
@@ -75,25 +75,25 @@ class SearchMatchesActivity : BaseActivity(), SearchMatchesMvpView, SearchView.O
     }
     override fun onQueryTextSubmit(query: String): Boolean {
         if (query.isNotEmpty()) {
-            presenter.getEventByKeyword(query)
+            presenter.getTeamByName(query)
         }
         return true
     }
 
     private fun initAdapter() {
-        searchMatchAdapter.onItemClickListener = object : OnItemClickListener<Event> {
-            override fun onClick(position: Int, item: Event) {
-                MatchDetailActivity.start(this@SearchMatchesActivity, item)
+        searchTeamAdapter.onItemClickListener = object : OnItemClickListener<FootballTeam> {
+            override fun onClick(position: Int, item: FootballTeam) {
+                DetailTeamActivity.start(this@SearchTeamActivity, item)
             }
         }
     }
 
     private fun initUI() {
-        textSearchType.text = getString(R.string.search_for_matches)
+        textSearchType.text = getString(R.string.search_for_team)
 
         listSearch.layoutManager = LinearLayoutManager(this)
         listSearch.addItemDecoration(VerticalItemDecoration(resources.getDimensionPixelSize(R.dimen.divider)))
-        listSearch.adapter = searchMatchAdapter
+        listSearch.adapter = searchTeamAdapter
 
         searchView.setOnQueryTextListener(this)
     }

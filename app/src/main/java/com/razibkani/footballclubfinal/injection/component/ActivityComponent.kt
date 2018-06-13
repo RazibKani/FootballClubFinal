@@ -10,6 +10,7 @@ import com.razibkani.footballclubfinal.ui.favorites.favoritesteam.FavoritesTeamF
 import com.razibkani.footballclubfinal.ui.matches.nextmatch.NextMatchListFragment
 import com.razibkani.footballclubfinal.ui.matches.prevmatch.PrevMatchListFragment
 import com.razibkani.footballclubfinal.ui.search.searchmatches.SearchMatchesActivity
+import com.razibkani.footballclubfinal.ui.search.searchteam.SearchTeamActivity
 import com.razibkani.footballclubfinal.ui.teams.TeamsFragment
 import dagger.Component
 
@@ -20,6 +21,7 @@ interface ActivityComponent {
     fun inject(matchDetailActivity: MatchDetailActivity)
     fun inject(detailTeamActivity: DetailTeamActivity)
     fun inject(searchMatchesActivity: SearchMatchesActivity)
+    fun inject(searchTeamActivity: SearchTeamActivity)
 
     fun inject(prevMatchListFragment: PrevMatchListFragment)
     fun inject(nextMatchListFragment: NextMatchListFragment)

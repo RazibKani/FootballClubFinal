@@ -7,7 +7,6 @@ import com.razibkani.footballclubfinal.data.local.DbFavoriteTeam
 import com.razibkani.footballclubfinal.data.local.FootballClubDbHelper
 import com.razibkani.footballclubfinal.data.model.*
 import com.razibkani.footballclubfinal.data.remote.ApiService
-import com.razibkani.footballclubfinal.utils.Constants
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
@@ -20,8 +19,8 @@ class DataManager(private val apiService: ApiService,
         return apiService.getFootballPrevEvent(leagueId).await()
     }
 
-    suspend fun getFootballNextEvent(): FootballEventResponse {
-        return apiService.getFootballNextEvent(Constants.LEAGUEID).await()
+    suspend fun getFootballNextEvent(leagueId: String): FootballEventResponse {
+        return apiService.getFootballNextEvent(leagueId).await()
     }
 
     suspend fun getFootballDetailEvent(idEvent: String): FootballDetailEventResponse {

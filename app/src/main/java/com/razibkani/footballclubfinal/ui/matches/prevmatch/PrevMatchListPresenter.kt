@@ -16,10 +16,10 @@ class PrevMatchListPresenter @Inject constructor(private val dataManager: DataMa
             val data = dataManager.getFootballPrevEvent(leagueId)
 
             mvpView?.apply {
-                if (data.events.isNotEmpty()) {
+                if (data.events != null && data.events.isNotEmpty()) {
                     this.updateDataEvents(data.events)
                 } else {
-                    this.showErrorMessage("Event Kosong")
+                    this.showEmptyState()
                 }
                 this.hideLoading()
             }

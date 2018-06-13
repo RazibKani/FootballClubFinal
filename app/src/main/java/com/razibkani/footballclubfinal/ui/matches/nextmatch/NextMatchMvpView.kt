@@ -1,6 +1,7 @@
 package com.razibkani.footballclubfinal.ui.matches.nextmatch
 
 import com.razibkani.footballclubfinal.data.model.Event
+import com.razibkani.footballclubfinal.data.model.FootballLeague
 import com.razibkani.footballclubfinal.ui.base.MvpView
 
 interface NextMatchMvpView : MvpView {
@@ -9,7 +10,9 @@ interface NextMatchMvpView : MvpView {
 
     fun hideLoading()
 
-    fun showErrorMessage(message: String)
+    fun showEmptyState()
 
-    fun updateData(data: List<Event>)
+    fun updateDataEvents(eventList: List<Event>)
+
+    fun updateDataLeagues(leagues: List<FootballLeague>)
 }

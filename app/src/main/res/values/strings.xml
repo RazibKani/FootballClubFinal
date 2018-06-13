@@ -25,12 +25,11 @@
     <string name="favorites">Favorites</string>
     <string name="search">Search</string>
 
-    <string name="title_activity_detail_team">DetailTeamActivity</string>
-    <string name="title_activity_detail_player">DetailPlayerActivity</string>
     <string name="weight_kg">Weight (Kg)</string>
     <string name="height_m">Height (m)</string>
     <string name="telusuri">Telusuri…</string>
     <string name="search_for_matches">Search for Matches</string>
     <string name="search_for_team">Search for Team</string>
+    <string name="empty_data">Empty Data</string>
 
 </resources>

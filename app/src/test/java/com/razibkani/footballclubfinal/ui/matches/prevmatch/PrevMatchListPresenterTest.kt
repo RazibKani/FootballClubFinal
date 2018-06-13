@@ -32,22 +32,22 @@ class PrevMatchListPresenterTest {
 
     @Test
     fun getEvents() {
-        val events: List<Event> = listOf()
+        val events: List<Event>? = listOf()
         val response = FootballEventResponse(events)
         runBlocking {
-            Mockito.`when`(dataManager.getFootballPrevEvent()).thenReturn(response)
+            Mockito.`when`(dataManager.getFootballPrevEvent("4328")).thenReturn(response)
         }
 
         presenter.attachView(mvpView)
 
-        presenter.getEvents()
+        presenter.getEvents("4328")
 
         verify(mvpView)?.showLoading()
 
-        if (events.isNotEmpty()) {
-            Mockito.verify(mvpView)?.updateData(events)
+        if (events != null && events.isNotEmpty()) {
+            Mockito.verify(mvpView)?.updateDataEvents(events)
         } else {
-            Mockito.verify(mvpView)?.showErrorMessage("Event Kosong")
+            Mockito.verify(mvpView)?.showEmptyState()
         }
 
         verify(mvpView)?.hideLoading()

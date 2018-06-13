@@ -36,6 +36,9 @@
         <activity
             android:name=".ui.search.searchmatches.SearchMatchesActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.search.searchteam.SearchTeamActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

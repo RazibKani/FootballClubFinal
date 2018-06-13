@@ -14,8 +14,8 @@ import com.razibkani.footballclubfinal.ui.base.BaseActivity
 import com.razibkani.footballclubfinal.ui.detailmatch.MatchDetailActivity
 import com.razibkani.footballclubfinal.utils.*
 import kotlinx.android.synthetic.main.fragment_prev_match_list.*
+import kotlinx.android.synthetic.main.layout_empty_state.*
 import kotlinx.android.synthetic.main.layout_league.*
-import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 class PrevMatchListFragment : Fragment(), PrevMatchListMvpView, SwipeRefreshLayout.OnRefreshListener {
@@ -67,8 +67,9 @@ class PrevMatchListFragment : Fragment(), PrevMatchListMvpView, SwipeRefreshLayo
         swipeRefresh.dismissRefresh()
     }
 
-    override fun showErrorMessage(message: String) {
-        toast(message)
+    override fun showEmptyState() {
+        listPrevMatch.hide()
+        empty_state.visible()
     }
 
     override fun onRefresh() {
@@ -76,6 +77,8 @@ class PrevMatchListFragment : Fragment(), PrevMatchListMvpView, SwipeRefreshLayo
     }
 
     override fun updateDataEvents(eventList: List<Event>) {
+        empty_state.hide()
+        listPrevMatch.visible()
         prevMatchAdapter.updateData(eventList)
     }
 

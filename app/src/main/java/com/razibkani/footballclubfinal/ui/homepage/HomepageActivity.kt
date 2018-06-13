@@ -10,10 +10,10 @@ import com.razibkani.footballclubfinal.ui.favorites.FavoritesFragment
 import com.razibkani.footballclubfinal.ui.matches.MatchesFragment
 import com.razibkani.footballclubfinal.ui.search.SearchType
 import com.razibkani.footballclubfinal.ui.search.searchmatches.SearchMatchesActivity
+import com.razibkani.footballclubfinal.ui.search.searchteam.SearchTeamActivity
 import com.razibkani.footballclubfinal.ui.teams.TeamsFragment
 import com.razibkani.footballclubfinal.utils.inTransaction
 import kotlinx.android.synthetic.main.activity_homepage.*
-import org.jetbrains.anko.toast
 
 class HomepageActivity : BaseActivity() {
 
@@ -80,10 +80,10 @@ class HomepageActivity : BaseActivity() {
             R.id.search -> {
                 if (searchType == SearchType.MATCHES) {
                     SearchMatchesActivity.start(this)
-                    overridePendingTransition(R.anim.slide_up, R.anim.no_anim)
                 } else {
-                    toast("Search team")
+                    SearchTeamActivity.start(this)
                 }
+                overridePendingTransition(R.anim.slide_up, R.anim.no_anim)
                 true
             }
 

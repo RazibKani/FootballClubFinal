@@ -6,6 +6,6 @@ data class FootballClubResponse(
 )
 
 data class Team(
-    @SerializedName("idTeam") val idTeam: String,
-    @SerializedName("strTeamBadge") val teamBadge: String
+    @SerializedName("idTeam") val idTeam: String?,
+    @SerializedName("strTeamBadge") val teamBadge: String?
 )

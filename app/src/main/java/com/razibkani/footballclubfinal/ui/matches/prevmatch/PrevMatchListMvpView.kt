@@ -10,7 +10,7 @@ interface PrevMatchListMvpView : MvpView {
 
     fun hideLoading()
 
-    fun showErrorMessage(message: String)
+    fun showEmptyState()
 
     fun updateDataEvents(eventList: List<Event>)
 

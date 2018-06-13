@@ -9,20 +9,24 @@ import javax.inject.Inject
 class NextMatchPresenter @Inject constructor(private val dataManager: DataManager,
                                              private val context: CoroutineContextProvider) : BasePresenter<NextMatchMvpView>() {
 
-    fun getEvents() {
+    fun getEvents(leagueId: String) {
         mvpView?.showLoading()
 
         async(context.main) {
-            val data = dataManager.getFootballNextEvent()
+            val data = dataManager.getFootballNextEvent(leagueId)
 
             mvpView?.apply {
-                if (data != null && data.events.isNotEmpty()) {
-                    this.updateData(data.events)
+                if (data.events != null && data.events.isNotEmpty()) {
+                    this.updateDataEvents(data.events)
                 } else {
-                    this.showErrorMessage("Event Kosong")
+                    this.showEmptyState()
                 }
                 this.hideLoading()
             }
         }
+    }
+
+    fun getLeagues() {
+        mvpView?.updateDataLeagues(dataManager.getLeagues())
     }
 }
