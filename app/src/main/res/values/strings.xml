@@ -23,12 +23,14 @@
     <string name="forward">Forward</string>
     <string name="substitutes">Substitutes</string>
     <string name="favorites">Favorites</string>
+    <string name="search">Search</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_detail_team">DetailTeamActivity</string>
     <string name="title_activity_detail_player">DetailPlayerActivity</string>
     <string name="weight_kg">Weight (Kg)</string>
     <string name="height_m">Height (m)</string>
+    <string name="telusuri">Telusuri…</string>
+    <string name="search_for_matches">Search for Matches</string>
+    <string name="search_for_team">Search for Team</string>
 
 </resources>

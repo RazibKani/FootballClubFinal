@@ -28,6 +28,12 @@ interface ApiService {
     @GET("searchplayers.php")
     fun getPlayerByTeamName(@Query("t") teamName: String): Deferred<FootballPlayerResponse>
 
+    @GET("searchteams.php")
+    fun getTeamsByName(@Query("t") teamName: String): Deferred<FootballTeamResponse>
+
+    @GET("searchevents.php")
+    fun getEventByKeyword(@Query("e") keyword: String): Deferred<FootballSearchEventResponse>
+
     companion object Factory {
         fun create(): ApiService {
             val retrofit = Retrofit.Builder()

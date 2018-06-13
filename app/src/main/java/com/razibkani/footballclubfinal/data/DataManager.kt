@@ -40,6 +40,14 @@ class DataManager(private val apiService: ApiService,
         return apiService.getPlayerByTeamName(teamName).await()
     }
 
+    suspend fun getTeamByName(teamName: String): FootballTeamResponse {
+        return apiService.getTeamsByName(teamName).await()
+    }
+
+    suspend fun getEventByKeyword(keyword: String): FootballSearchEventResponse {
+        return apiService.getEventByKeyword(keyword).await()
+    }
+
     fun addMatchToFavorite(event: Event, callback: DbCallback) {
         try {
             database.use {

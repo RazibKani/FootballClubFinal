@@ -32,8 +32,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.detailplayer.DetailPlayerActivity"
-            android:label="@string/title_activity_detail_player"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.search.searchmatches.SearchMatchesActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
